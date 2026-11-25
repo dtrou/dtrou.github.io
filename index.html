@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <meta name="author" content="Dimitrios Troullinos">
+    <meta name="description" content="Postdoctoral researcher at IIIA-CSIC working on multiagent systems.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta property="og:title" content="Dimitrios Troullinos">
+    <meta property="og:description" content="Postdoctoral researcher at IIIA-CSIC working on multiagent systems.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:,">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  </head>
+
+  <body>
+    <!--
+      TOP BAR
+      Each link points to a section below by its id (href="#talks" goes to <section id="talks">).
+      To remove a section, delete its link here AND its <section> below.
+      To add one, copy a <li> here and a <section> below, and give both the same id.
+    -->
+    <nav class="topbar" aria-label="Sections">
+      <div class="topbar-inner">
+        <a class="home-link" href="#home">Home</a>
+       
+      </div>
+    </nav>
+
+    <main class="page">
+
+      <!-- ================= HOME ================= -->
+      <section id="home" class="intro">
+        <h1 class="name">Dimitrios Troullinos</h1>
+        <p class="tagline">Postdoctoral Researcher&middot; Artificial Intelligence Research Institute (IIIA-CSIC) &middot; Spanish National Research Council (CSIC)</p>
+
+        <p>
+          Hi! I'm a postdoctoral researcher at the <a target="_blank" href="https://iiia.csic.es/en-us/">Artificial Intelligence Research Institute</a>, advised by <a target="_blank" href="https://jariiia.github.io/">Prof. Juan A. Rodríguez Aguilar</a> and <a target="_blank" href="https://es.linkedin.com/in/angela-ribeiro-seijas-24b3b760">Prof. Ángela Ribeiro</a>, as part of my ongoing MSCA (Cofund) Fellowship for the <a target="_blank" href="https://aihub.csic.es/en/allies-cofund/">ALLIES project</a>.
+          My research interests lie in the area of <strong>multiagent systems</strong>: more specifically in <strong>distributed constraint optimization problems</strong> and <strong>reinforcement learning</strong>, with application areas in <strong>lane-free traffic</strong>, and more recently in <strong>agricultural robotics for human-robot collaboration</strong>.
+          I have a PhD from the <a target="_blank" href="https://www.tuc.gr/">Technical University of Crete</a>, advised by <a target="_blank" href="https://www.intelligence.tuc.gr/~gehalk/">Prof. Georgios Chalkiadakis</a> and <a target="_blank" href="https://www.trafficfluid.tuc.gr/en/people/principal-investigator">Prof. Markos Papageorgiou</a>, within the frame of the ERC Advanced Grant <a target="_blank" href="https://www.trafficfluid.tuc.gr">Trafficfluid</a>. Previously, I studied Electrical and Computer Engineering (MEng) at the same institute.
+        </p>
+        
+
+        <p class="bio-links">
+          <!-- Your email is NOT written here, so address-harvesting bots can't find it.
+               Clicking "Email" shows the address. Set it in the script at the bottom of this file. -->
+          <a target="_blank" href="#" class="email-link" title="Click to show my email address">Email</a><noscript> (turn on JavaScript to see it)</noscript> &nbsp;/&nbsp;
+          <a target="_blank" href="https://scholar.google.com/citations?user=QUQWDfIAAAAJ">Google Scholar</a> &nbsp;/&nbsp;
+          <a target="_blank" href="https://orcid.org/0000-0003-3228-3888">ORCID</a> &nbsp;/&nbsp;
+          <a target="_blank" href="https://github.com/dtrou">GitHub</a> &nbsp;/&nbsp;
+          <a target="_blank" href="https://www.linkedin.com/in/dimitrios-troullinos-875117247/">LinkedIn</a>
+        </p>
+      </section>
+
+      
+      <footer class="site-footer">
+        <p>
+          Last updated November 2026. Design adapted from <a target="_blank" href="https://github.com/jonbarron/jonbarron_website">Jon Barron's website</a>.
+        </p>
+      </footer>
+    </main>
+
+   
+    <script>
+      (function () {
+        var nme = "dimitrios.troullinos";
+        var dmn = "iiia.csic.es";
+
+        function address() { return nme + String.fromCharCode(64) + dmn; }
+
+        // "Email" link at the top: the first click turns it into the address
+        // (a normal email link the visitor can click or copy).
+        document.querySelectorAll('.email-link').forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            if (link.getAttribute('href') !== '#') { return; }   // already revealed: let it open
+            e.preventDefault();
+            link.href = 'mailto:' + address();
+            link.textContent = address();
+            link.removeAttribute('title');
+          });
+        });
+      })();
+    </script>
+
+    <!-- Underlines the top-bar link of the section on screen. No need to edit. -->
+    <script>
+      (function () {
+        var bar = document.querySelector('.topbar');
+        var links = Array.prototype.slice.call(bar.querySelectorAll('a[href^="#"]'));
+        var sections = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); })
+                            .filter(Boolean);
+        var current = null;
+        var clicked = null;   // a section chosen from the bar stays underlined until you scroll yourself
+
+        function update() {
+          if (clicked) { setActive(clicked); return; }
+          var line = bar.offsetHeight + 24;
+          var id = sections[0].id;
+          sections.forEach(function (s) {
+            if (s.getBoundingClientRect().top <= line) { id = s.id; }
+          });
+          // At the bottom of the page, the last section is the current one.
+          if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+            id = sections[sections.length - 1].id;
+          }
+          setActive(id);
+        }
+
+        function setActive(id) {
+          if (id === current) { return; }
+          current = id;
+          links.forEach(function (a) {
+            var on = a.getAttribute('href') === '#' + id;
+            a.classList.toggle('active', on);
+            // keep the active link visible when the bar scrolls sideways on phones
+            var list = a.closest('.nav-links');  // null for Home
+            if (on && list && list.scrollWidth > list.clientWidth) {
+              var left = a.offsetLeft - list.offsetLeft;
+              if (left < list.scrollLeft || left + a.offsetWidth > list.scrollLeft + list.clientWidth - 40) {
+                list.scrollLeft = left - 16;
+              }
+            }
+          });
+        }
+
+        links.forEach(function (a) {
+          a.addEventListener('click', function () {
+            clicked = a.getAttribute('href').slice(1);
+            setActive(clicked);
+          });
+        });
+
+        // Once you scroll yourself, the underline follows the page again.
+        ['wheel', 'touchmove', 'keydown', 'mousedown'].forEach(function (type) {
+          window.addEventListener(type, function (e) {
+            if (type === 'mousedown' && e.target.closest('.topbar')) { return; }
+            if (clicked) { clicked = null; update(); }
+          }, { passive: true });
+        });
+
+        // "Home" always returns to the very top.
+        bar.querySelector('.home-link').addEventListener('click', function (e) {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (history.replaceState) { history.replaceState(null, '', location.pathname); }
+        });
+
+        // On phones, fade the right edge of the bar while more links are hidden.
+        var list = bar.querySelector('.nav-links');
+        function updateFade() {
+          list.classList.toggle('more', list.scrollLeft + list.clientWidth < list.scrollWidth - 1);
+        }
+        list.addEventListener('scroll', updateFade, { passive: true });
+
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', function () { update(); updateFade(); });
+        update();
+        updateFade();
+      })();
+    </script>
+  </body>
+</html>
